@@ -10,6 +10,17 @@
     <button onclick="startTimer()">Start</button>
     <button onclick="pauseTimer()">Pause</button>
     <button onclick="resetTimer()">Reset</button>
+    <button onclick="resetHard()">Reset(Hard)</button>
+
+    <div>
+        Current Set: <span id="setNumberDisplay">0</span>
+    </div>
+    
+    <label>Work Duration (minutes): <input type="number" id="workDurationInput" value="25"></label>
+    <label>Short Break Duration (minutes): <input type="number" id="shortBreakInput" value="5"></label>
+    <label>Long Break Duration (minutes): <input type="number" id="longBreakInput" value="15"></label>
+    <label>Sets Before Long Break: <input type="number" id="setsInput" value="4"></label>
+    <button onclick="updateSettings()">Update Settings</button>
 
     <script src="index.js"></script>
 </body>

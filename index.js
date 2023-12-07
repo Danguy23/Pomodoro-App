@@ -1,7 +1,20 @@
 let workDuration = 25 * 60;
-let breakDuration = 5*60;
+let breakDuration = 5 * 60;
+let longBreakDuration = 15 * 60;
+let completeSets = 0;
+let setsBeforeLongBreak = 4;
 let isTimerRunning = false;
+let isWorkSession = true;
 let currentTime = workDuration;
+
+function updateSettings() { // allows for user customization of values
+    workDuration = parseFloat(document.getElementById("workDurationInput").value) * 60;
+    breakDuration = parseFloat(document.getElementById('shortBreakInput').value) * 60;
+    longBreakDuration = parseFloat(document.getElementById('longBreakInput').value) * 60;
+    setsBeforeLongBreak = parseInt(document.getElementById('setsInput').value);
+
+    resetTimer();
+}
 
 let timerInterval;
 
@@ -22,12 +35,19 @@ function updateTimer() {
 }
 
 function toggleSession() { // switches from work to break timer
-    isTimerRunning = false; // turns off timer
-    clearInterval(timerInterval); // clears timer
+    isTimerRunning = false; 
+    clearInterval(timerInterval); // stops timer
 
-    if (currentTime <= 0 && isWorkSession) { // checks to see if timer ran out AND if it ran out during a work session
-        currentTime = breakDuration; // switches to break timer
-        isWorkSession = false;
+    if (isWorkSession) {
+        completeSets++; // adds to completed set count
+        document.getElementById('setNumberDisplay').textContent = completeSets; // update set number display
+        if (completeSets % setsBeforeLongBreak === 0) { // checks to see if completeSets is exactly divisable by setsBeforeLongBreak
+            currentTime = longBreakDuration;
+            isWorkSession = false 
+        } else {
+            currentTime = breakDuration;
+            isWorkSession = false;
+        }
     } else {
         currentTime = workDuration;
         isWorkSession = true;
@@ -44,12 +64,14 @@ function toggleSession() { // switches from work to break timer
         minutes = minutes < 10 ? "0" + minutes : minutes; // makes sure the display adds a 0 in front of single digit numbers
         seconds = seconds < 10 ? "0" + seconds : seconds;
         
-        document.getElementById("timerDisplay").textContent = `${minutes}:${seconds}`;
+        document.getElementById("timerDisplay").textContent = `${minutes}:${seconds}`; // updates HTML element timerDisplay
     }
 
     function pauseTimer() {
-        isTimerRunning = false;
-        clearInterval(timerInterval);
+        if (isTimerRunning) {
+            isTimerRunning = false;
+            clearInterval(timerInterval);
+        }
     }
 
     function resetTimer() {
@@ -57,4 +79,14 @@ function toggleSession() { // switches from work to break timer
         clearInterval(timerInterval);
         currentTime = workDuration; // reset to work timer
         updateDisplay(currentTime);
+    }
+
+    function resetHard() {
+        isTimerRunning = false;
+        clearInterval(timerInterval);
+        currentTime = workDuration;
+        updateDisplay(currentTime);
+        completeSets = 0; // resets completed sets
+        isWorkSession = true; // reset to start with a work session
+
     }
