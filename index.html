@@ -4,24 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pomodoro</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="timerDisplay">25:00</div>
-    <button onclick="startTimer()">Start</button>
-    <button onclick="pauseTimer()">Pause</button>
-    <button onclick="resetTimer()">Reset</button>
-    <button onclick="resetHard()">Reset(Hard)</button>
+    <div id="pomodoro-app">
+        <div id="timer-display">25:00</div>
+        <div id="timer-controls">
+            <button id="start-btn" onclick="startTimer()">Start</button>
+            <button id="pause-btn" onclick="pauseTimer()">Pause</button>
+            <button id="reset-btn" onclick="resetTimer()">Reset</button>
+            <button id="hard-reset-btn" onclick="resetHard()">Reset(Hard)</button>
+        </div>
 
-    <div>
-        Current Set: <span id="setNumberDisplay">0</span>
+        <div id="settings">
+            <label for="work-duration-input">Work Duration (minutes):</label>
+            <select id="work-duration-input">
+                <option value="15">15</option>
+                <option value="25" selected>25</option>
+                <option value="30">30</option>
+                <option value="45">45</option>
+                <option value="60">60</option>
+            </select>
+        
+            <label for="short-break-input">Short Break Duration (minutes):</label>
+            <select id="short-break-input">
+                <option value="3">3</option>
+                <option value="5" selected>5</option>
+                <option value="10">10</option>
+            </select>
+        
+            <label for="long-break-input">Long Break Duration (minutes):</label>
+            <select id="long-break-input">
+                <option value="10">10</option>
+                <option value="15" selected>15</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+            </select>
+        
+            <label for="sets-input">Sets Before Long Break:</label>
+            <select id="sets-input">
+                <option value="2">2</option>
+                <option value="4" selected>4</option>
+                <option value="6">6</option>
+            </select>
+        
+            <button onclick="updateSettings()">Update Settings</button>
+        </div>
+        
     </div>
     
-    <label>Work Duration (minutes): <input type="number" id="workDurationInput" value="25"></label>
-    <label>Short Break Duration (minutes): <input type="number" id="shortBreakInput" value="5"></label>
-    <label>Long Break Duration (minutes): <input type="number" id="longBreakInput" value="15"></label>
-    <label>Sets Before Long Break: <input type="number" id="setsInput" value="4"></label>
-    <button onclick="updateSettings()">Update Settings</button>
-
     <script src="index.js"></script>
 </body>
 </html>
+

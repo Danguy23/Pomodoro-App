@@ -8,10 +8,10 @@ let isWorkSession = true;
 let currentTime = workDuration;
 
 function updateSettings() { // allows for user customization of values
-    workDuration = parseFloat(document.getElementById("workDurationInput").value) * 60;
-    breakDuration = parseFloat(document.getElementById('shortBreakInput').value) * 60;
-    longBreakDuration = parseFloat(document.getElementById('longBreakInput').value) * 60;
-    setsBeforeLongBreak = parseInt(document.getElementById('setsInput').value);
+    workDuration = parseFloat(document.getElementById("work-duration-input").value) * 60;
+    breakDuration = parseFloat(document.getElementById('short-break-input').value) * 60;
+    longBreakDuration = parseFloat(document.getElementById('long-break-input').value) * 60;
+    setsBeforeLongBreak = parseInt(document.getElementById('sets-input').value);
 
     resetTimer();
 }
@@ -40,7 +40,7 @@ function toggleSession() { // switches from work to break timer
 
     if (isWorkSession) {
         completeSets++; // adds to completed set count
-        document.getElementById('setNumberDisplay').textContent = completeSets; // update set number display
+        document.getElementById('set-number-display').textContent = completeSets; // update set number display
         if (completeSets % setsBeforeLongBreak === 0) { // checks to see if completeSets is exactly divisable by setsBeforeLongBreak
             currentTime = longBreakDuration;
             isWorkSession = false 
@@ -64,7 +64,7 @@ function toggleSession() { // switches from work to break timer
         minutes = minutes < 10 ? "0" + minutes : minutes; // makes sure the display adds a 0 in front of single digit numbers
         seconds = seconds < 10 ? "0" + seconds : seconds;
         
-        document.getElementById("timerDisplay").textContent = `${minutes}:${seconds}`; // updates HTML element timerDisplay
+        document.getElementById("timer-display").textContent = `${minutes}:${seconds}`; // updates HTML element timerDisplay
     }
 
     function pauseTimer() {
